@@ -3,3 +3,14 @@
     margin: 0;
     padding: 0;
 }
+
+/*table */
+.table td {
+    padding: 15px;
+}
+
+.table th {
+    padding: 12px;
+    color: rgb(157, 152, 152);
+   
+}

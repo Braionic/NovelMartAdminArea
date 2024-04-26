@@ -1,53 +1,43 @@
 import { Column } from '@ant-design/plots';
 import React from 'react';
-import ReactDOM from 'react-dom';
+
+
+const data = [
+  { type: 'Jan', value: 0.16 },
+  { type: 'Feb', value: 0.125 },
+  { type: 'Mar', value: 0.24 },
+  { type: 'Apr', value: 0.19 },
+  { type: 'May', value: 0.22 },
+  { type: 'Jun', value: 0.05 },
+  { type: 'Jul', value: 0.01 },
+  { type: 'AUug', value: 0.015 },
+];
 
 export const RevenueChart = () => {
   const config = {
-    data: {
-      type: 'fetch',
-      value: 'https://gw.alipayobjects.com/os/antfincdn/8elHX%26irfq/stack-column-data.json',
-    },
-    xField: 'year',
+    data,
+    xField: 'type',
     yField: 'value',
-    colorField: 'type',
-    stack: true,
-    interaction: {
-      tooltip: {
-        render: (e, { title, items }) => {
-          return (
-            <div key={title}>
-              <h4>{title}</h4>
-              {items.map((item) => {
-                const { name, value, color } = item;
-                return (
-                  <div>
-                    <div style={{ margin: 0, display: 'flex', justifyContent: 'space-between' }}>
-                      <div>
-                        <span
-                          style={{
-                            display: 'inline-block',
-                            width: 6,
-                            height: 6,
-                            borderRadius: '50%',
-                            backgroundColor: color,
-                            marginRight: 6,
-                          }}
-                        ></span>
-                        <span>{name}</span>
-                      </div>
-                      <b>{value}</b>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          );
-        },
+    style: {
+      fill: ({ type, value }) => {
+        if (value === 0.10 || value < 0.10) {
+          return 'red';
+        }
+        return 'yellow';
       },
     },
+    label: {
+      text: (originData) => {
+        const val = parseFloat(originData.value);
+        if (val < 0.05) {
+          return (val * 100).toFixed(1) + '%';
+        }
+        return '';
+      },
+      offset: 9,
+    },
+    legend: false,
   };
   return <Column {...config} />;
 };
-
 

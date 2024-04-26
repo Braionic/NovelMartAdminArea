@@ -13,7 +13,7 @@ import { FaBell } from "react-icons/fa";
 import { FaDatabase } from "react-icons/fa";
 
 const LayoutRoute = () => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
