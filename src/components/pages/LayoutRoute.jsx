@@ -6,14 +6,16 @@ import {
   UserOutlined,
   VideoCameraOutlined,
 } from "@ant-design/icons";
+import { FaBlogger } from "react-icons/fa";
 import { Button, Layout, Menu, theme } from "antd";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 const { Header, Sider, Content } = Layout;
 import { FaBell } from "react-icons/fa";
-import { FaDatabase } from "react-icons/fa";
-
+import { FaRegQuestionCircle, FaLuggageCart } from "react-icons/fa";
+import { AiOutlineDashboard } from "react-icons/ai";
 const LayoutRoute = () => {
   const [collapsed, setCollapsed] = useState(true);
+  const navigate = useNavigate();
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -32,35 +34,88 @@ const LayoutRoute = () => {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={["1"]}
+          defaultSelectedKeys={[""]}
+          onClick={({ key }) => {
+            key === "signout" ? "" : navigate(key);
+          }}
           items={[
             {
-              key: "1",
-              icon: <UserOutlined />,
+              key: "/",
+              icon: <AiOutlineDashboard />,
               label: "Dashboard",
             },
+            {key: "customers", label: "Customers", icon: <UserOutlined />},
             {
-              key: "2",
-              icon: <FaDatabase />,
+              key: "3",
+              icon: <FaLuggageCart />,
               label: "Catalog",
-              children: [{ key: "product list",icon: <VideoCameraOutlined />, label: "Product List" },
-              { key: "product",icon: <VideoCameraOutlined />, label: "Product" },
-              { key: "categories list",icon: <VideoCameraOutlined />, label: "Categories List" },
-              { key: "Categories",icon: <VideoCameraOutlined />, label: "Categories" }],
+              children: [
+                { key: "add-product", label: "Add Product" },
+                {
+                  key: "products",
+                  icon: <FaLuggageCart />,
+                  label: "Product List",
+                },
+                {
+                  key: "add-brand",
+                  icon: <VideoCameraOutlined />,
+                  label: "Brand",
+                },
+                {
+                  key: "brand-list",
+                  icon: <VideoCameraOutlined />,
+                  label: "Brand List",
+                },
+                {
+                  key: "add-categories",
+                  icon: <VideoCameraOutlined />,
+                  label: "Add Categories",
+                },
+                {
+                  key: "categories",
+                  icon: <VideoCameraOutlined />,
+                  label: "Categories List",
+                },
+              ,
+              ],
             },
             {
-              key: "customers",
-              icon: <UserOutlined />,
-              label: "customers",
+              key: "4",
+              icon: <FaBlogger />,
+              label: "Blog",
               children: [
-                { key: "customers list",icon: <VideoCameraOutlined />, label: "Customers List" },
-                { key: "Customer",icon: <VideoCameraOutlined />, label: "Customer" }
-              ]
+                {
+                  key: "add-blog",
+                  icon: <VideoCameraOutlined />,
+                  label: "Add Blog",
+                },
+                {
+                  key: "blogs",
+                  icon: <VideoCameraOutlined />,
+                  label: "Blog List",
+                },
+                {
+                  key: "blog-categories",
+                  icon: <VideoCameraOutlined />,
+                  label: "Blog Categories",
+                },
+                {
+                  key: "add-blog-cat",
+                  icon: <VideoCameraOutlined />,
+                  label: "Add Blog Category",
+                }
+              ],
             },
-            { key: "orders",icon: <VideoCameraOutlined />, label: "Orders", children: [
-              { key: "orders list",icon: <VideoCameraOutlined />, label: "Orders List" },
-              { key: "orders details",icon: <VideoCameraOutlined />, label: "Orders Details" },
-            ] },
+            {
+              key: "orders",
+              icon: <VideoCameraOutlined />,
+              label: "Order",
+            },
+            {
+              key: "enquiries",
+              icon: <FaRegQuestionCircle />,
+              label: "Enquiries",
+            },
           ]}
         />
       </Sider>

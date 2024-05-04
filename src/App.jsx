@@ -101,7 +101,7 @@ function App() {
           </div>
         </div>
 
-        <div className="total-sale p-3 flex-grow-1 rounded shadow bg-light w-50">
+        <div className="total-sale p-3 flex-grow-1 rounded shadow bg-light w-75">
           <div className="d-flex align-items-center justify-content-between">
             <p className="text-secondary">Income Statistics</p>
             <div>

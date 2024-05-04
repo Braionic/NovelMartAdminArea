@@ -34,7 +34,7 @@ export const RevenueChart = () => {
         }
         return '';
       },
-      offset: 9,
+      offset: 10,
     },
     legend: false,
   };
