@@ -18,28 +18,33 @@ import Orders from "./components/pages/Orders.jsx";
 import BlogCategories from "./components/pages/BlogCategories.jsx";
 import AddBlog from "./components/pages/AddBlog.jsx";
 import AddBlogCat from "./components/pages/AddBlogCat.jsx";
+import {Provider} from 'react-redux'
+import { store } from "./store/store.js";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-<BrowserRouter>
-<Routes>
-<Route path="login" element={<Login />} />
-  <Route path="logout" element={<Logout />} />
-  <Route path="/" element={<LayoutRoute />}>
-    <Route index element={<App />} />
-    <Route path="add-product" element={<AddProduct />} />
-    <Route path="products" element={<Products />} />
-    <Route path="customers" element={<Customers />} />
-    <Route path="blogs" element={<Blogs />} />
-    <Route path="brand-list" element={<BrandList />} />
-    <Route path="add-brand" element={<AddBrand />} />
-    <Route path="add-blog" element={<AddBlog />} />
-    <Route path="add-blog-cat" element={<AddBlogCat />} />
-    <Route path="blog-categories" element={<BlogCategories />} />
-    <Route path="add-categories" element={<AddCategories />} />
-    <Route path="categories" element={<Categories />} />
-    <Route path="orders" element={<Orders />} />
-    
-    <Route path="enquiries" element={<Enquiry />} />
-  </Route>
-</Routes>
-</BrowserRouter>);
+  <Provider store={store}>
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="logout" element={<Logout />} />
+      <Route path="/admin" element={<LayoutRoute />}>
+        <Route index element={<App />} />
+        <Route path="add-product" element={<AddProduct />} />
+        <Route path="products" element={<Products />} />
+        <Route path="customers" element={<Customers />} />
+        <Route path="blogs" element={<Blogs />} />
+        <Route path="brand-list" element={<BrandList />} />
+        <Route path="add-brand" element={<AddBrand />} />
+        <Route path="add-blog" element={<AddBlog />} />
+        <Route path="add-blog-cat" element={<AddBlogCat />} />
+        <Route path="blog-categories" element={<BlogCategories />} />
+        <Route path="add-categories" element={<AddCategories />} />
+        <Route path="categories" element={<Categories />} />
+        <Route path="orders" element={<Orders />} />
+
+        <Route path="enquiries" element={<Enquiry />} />
+      </Route>
+    </Routes>
+  </BrowserRouter>
+  </Provider>
+);

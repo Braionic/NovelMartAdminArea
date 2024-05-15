@@ -19,3 +19,61 @@
 .quill {
     background-color: white;
 }
+
+
+/* Login */
+
+.c-color {
+    color: #3098A3;
+}
+.c-rounded {
+    border-radius: 11px;
+}
+.login-container {
+    background-color: #3098A3;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.child-container {
+    height: 80%;
+    background-color: bisque;
+}
+
+.child-container > div {
+    flex-grow: 1;
+    height: 100%;
+}
+
+.login-container .logo-area {
+    background-color: #024955;
+}
+
+
+
+.text-field {
+    border: none;
+    background-color: #D6EAEC;
+   
+}
+
+.text-field:focus {
+    outline: none;
+}
+
+.box-text-field{
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    gap: 5px;
+    padding-right: 5px;
+    box-shadow: 3px 3px 5px rgb(179, 181, 182);
+}
+
+.c-text {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 0
+}

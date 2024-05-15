@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Table } from "antd";
 
+import { useDispatch, useSelector } from "react-redux";
+import { allCustomers } from "../../store/features/customers/customersSlice";
+
 export default function Customers() {
+  const dispatch = useDispatch()
+  const {customer, isLoading, error} = useSelector((state)=> state.customer)
+  useEffect(()=>{
+dispatch(allCustomers())
+  }, [])
+  console.log(customer, isLoading, error)
   const dataSource = [
     {
       key: "1",
