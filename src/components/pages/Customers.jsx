@@ -5,12 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { allCustomers } from "../../store/features/customers/customersSlice";
 
 export default function Customers() {
-  const dispatch = useDispatch()
-  const {customer, isLoading, error} = useSelector((state)=> state.customer)
-  useEffect(()=>{
-dispatch(allCustomers())
-  }, [])
-  console.log(customer, isLoading, error)
+  const dispatch = useDispatch();
+  const { customer, isLoading, error } = useSelector((state) => state.customer);
+
+  useEffect(() => {
+    dispatch(allCustomers());
+  }, []);
+  console.log(customer, isLoading, error);
   const dataSource = [
     {
       key: "1",
@@ -28,28 +29,53 @@ dispatch(allCustomers())
 
   const columns = [
     {
+      title: "key",
+      dataIndex: "key",
+      key: "key",
+    },
+
+    {
       title: "Name",
       dataIndex: "name",
       key: "name",
     },
     {
-      title: "Age",
-      dataIndex: "age",
-      key: "age",
+      title: "email",
+      dataIndex: "email",
+      key: "email",
     },
     {
       title: "Address",
       dataIndex: "address",
       key: "address",
     },
+    {
+      title: "mobile",
+      dataIndex: "mobile",
+      key: "mobile",
+    },
+    {
+      title: "createAt",
+      dataIndex: "createdAt",
+      key: "createdAt",
+    },
   ];
-
+  let customersArry = [];
+  for (let i = 0; i < customer?.length; i++) {
+    customersArry.push({
+      key: i + 1,
+      name: customer[i].name,
+      email: customer[i].address,
+      address: customer[i].mobile,
+      createdAt: customer[i].createdAt,
+    });
+  }
   return (
     <div>
       <h4>Customers</h4>
 
       <div>
-        <Table dataSource={dataSource} columns={columns} />;
+        <Table dataSource={customersArry} columns={columns} />;
       </div>
     </div>
   );

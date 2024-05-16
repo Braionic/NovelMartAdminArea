@@ -3,16 +3,15 @@ import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import { useSelector, useDispatch } from "react-redux";
 
-
 export default function Form({ handleAdmin }) {
   const { register, control, handleSubmit, formState } = useForm({
     mode: "onChange",
   });
-  const {user, isLoading, error} = useSelector((state) => state.user)
+  const { user, isLoading, error } = useSelector((state) => state.user);
   const { errors } = formState;
   //handles the submit
   function mySubmit(data) {
-    console.log(data)
+    console.log(data);
     handleAdmin(data);
   }
   return (
@@ -82,7 +81,7 @@ export default function Form({ handleAdmin }) {
           </label>
         </div>
         <button type="submit" className="btn btn-primary">
-          {isLoading? "wait": "Proceed"}
+          {isLoading ? "wait" : "Proceed"}
         </button>
       </form>
       <DevTool control={control} />
