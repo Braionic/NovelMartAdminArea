@@ -111,7 +111,7 @@ function App() {
             <p className="text-secondary">Income Statistics</p>
             <div>
               <select class="form-select" aria-label="select example">
-                <option selected value="1">
+                <option defaultValue value="1">
                   One
                 </option>
               </select>

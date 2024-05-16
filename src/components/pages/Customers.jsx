@@ -38,6 +38,7 @@ export default function Customers() {
       title: "Name",
       dataIndex: "name",
       key: "name",
+      sorter: (a, b) => a.name.length - b.name.length
     },
     {
       title: "email",
@@ -62,13 +63,16 @@ export default function Customers() {
   ];
   let customersArry = [];
   for (let i = 0; i < customer?.length; i++) {
-    customersArry.push({
-      key: i + 1,
-      name: customer[i].name,
-      email: customer[i].address,
-      address: customer[i].mobile,
-      createdAt: customer[i].createdAt,
-    });
+    if (customer[i].role !== "admin") {
+      customersArry.push({
+        key: i + 1,
+        name: customer[i].name,
+        email: customer[i].email,
+        address: customer[i].address,
+        mobile: customer[i].mobile,
+        createdAt: customer[i].createdAt,
+      });
+    }
   }
   return (
     <div>

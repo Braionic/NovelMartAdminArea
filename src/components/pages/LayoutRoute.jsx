@@ -40,7 +40,7 @@ const LayoutRoute = () => {
           }}
           items={[
             {
-              key: "/",
+              key: "/admin",
               icon: <AiOutlineDashboard />,
               label: "Dashboard",
             },
