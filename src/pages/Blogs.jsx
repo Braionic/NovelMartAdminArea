@@ -1,46 +1,67 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Table } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { BlogsThunk } from "../store/features/blog/blogSlice";
 
 export default function Blogs() {
-  const dataSource = [
-    {
-      key: "1",
-      name: "Mike",
-      age: 32,
-      address: "10 Downing Street",
-    },
-    {
-      key: "2",
-      name: "John",
-      age: 42,
-      address: "10 Downing Street",
-    },
-  ];
+  const blogs = useSelector((state) => state.blog.blogs);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(BlogsThunk());
+  }, []);
+  console.log(blogs);
 
   const columns = [
     {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
+      title: "NO",
+      dataIndex: "Key",
+      key: "Key",
     },
     {
-      title: "Age",
-      dataIndex: "age",
-      key: "age",
+      title: "Title",
+      dataIndex: "title",
+      key: "title",
     },
     {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
+      title: "Description",
+      dataIndex: "description",
+      key: "description",
     },
+    {
+      title: "Author",
+      dataIndex: "author",
+      key: "author",
+    },
+    {
+      title: "Date Created",
+      dataIndex: "createdAt",
+      key: "createdAt",
+      
+    },
+    {
+      title: "Page Views",
+      dataIndex: "pageViews",
+      key: "pageViews",
+    }
   ];
 
+  let data = [];
+  for (let i = 0; i < blogs.length; i++) {
+    data.push({
+      Key: i + 1,
+      title: blogs[i].title,
+      description: blogs[i].description,
+      author: blogs[i].author,
+      createdAt: blogs[i].createdAt,
+      pageViews: blogs[i].pageViews
+    });
+  }
   return (
     <div>
       <h4>Blog List</h4>
 
       <div>
-        <Table dataSource={dataSource} columns={columns} />;
+        <Table dataSource={data} columns={columns} />;
       </div>
     </div>
   );

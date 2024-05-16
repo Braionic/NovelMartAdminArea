@@ -1,46 +1,48 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Table } from "antd";
+import { useSelector, useDispatch } from "react-redux";
+import { CategoryThunk } from "../store/features/category/categorySlice";
+import { Link } from "react-router-dom";
 
 export default function Categories() {
-  const dataSource = [
-    {
-      key: "1",
-      name: "Mike",
-      age: 32,
-      address: "10 Downing Street",
-    },
-    {
-      key: "2",
-      name: "John",
-      age: 42,
-      address: "10 Downing Street",
-    },
-  ];
+  const categories = useSelector((state) => state.category.categories);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(CategoryThunk());
+  }, []);
 
   const columns = [
     {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
+      title: "NO",
+      dataIndex: "Key",
+      key: "Key",
     },
     {
-      title: "Age",
-      dataIndex: "age",
-      key: "age",
+      title: "Title",
+      dataIndex: "title",
+      key: "title",
     },
     {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
+      title: "Action",
+      dataIndex: "Action",
+      key: "Action",
     },
   ];
+  let data = [];
+  for (let i = 0; i < categories.length; i++) {
+    data.push({
+      Key: i + 1,
+      title: categories[i].title,
+      Action: <Link>Edit</Link>,
+    });
+  }
 
   return (
     <div>
       <h4>Categories</h4>
 
       <div>
-        <Table dataSource={dataSource} columns={columns} />;
+        <Table dataSource={data} columns={columns} />;
       </div>
     </div>
   );

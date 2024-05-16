@@ -7,26 +7,31 @@ import { useSelector, useDispatch } from "react-redux";
 import Form from "../components/Form";
 import { adminSignIn } from "../store/features/auth/userSlice";
 
-
+//Login page render starts here
 export default function Login() {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
-  const {user, isLoading, error} = useSelector((state) => state.user)
-console.log(error, isLoading, user)
+  const navigate = useNavigate();
+  const { user, isLoading, error } = useSelector((state) => state.user);
+  console.log(error, isLoading, user);
 
-useEffect(()=>{
-if(user){
-  return navigate('/admin')
-}
-},[isLoading, user])
+  //helps to navigate to the admin panels if user is signed in
+  useEffect(() => {
+    if (user) {
+      return navigate("/admin");
+    }
+  }, [isLoading, user]);
+
+  //function that handles the Admin sign in
   const handleAdmin = (userCredentials) => {
-    dispatch(adminSignIn(userCredentials)).then((data) => {
-      if (data?.payload) {
-        console.log(data.payload);
-      }
-    }).catch((error)=> {
-      console.log(error)
-    });
+    dispatch(adminSignIn(userCredentials))
+      .then((data) => {
+        if (data?.payload) {
+          console.log(data.payload);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <div className="login-container">
