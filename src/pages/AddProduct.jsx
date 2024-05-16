@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import UploadBox from "../UploadBox";
+import UploadBox from "../components/UploadBox";
 import { Stepper } from "react-form-stepper";
-import TextInput from "../TextInput";
+import TextInput from "../components/TextInput";
 
 export default function AddProduct() {
   const [value, setValue] = useState("");

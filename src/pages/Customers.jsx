@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Table } from "antd";
 
 import { useDispatch, useSelector } from "react-redux";
-import { allCustomers } from "../../store/features/customers/customersSlice";
+import { allCustomers } from "../store/features/customers/customersSlice";
 
 export default function Customers() {
   const dispatch = useDispatch();

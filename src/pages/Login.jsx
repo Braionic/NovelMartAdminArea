@@ -1,11 +1,11 @@
 import React, { useEffect, useLayoutEffect } from "react";
-import TextInput from "../TextInput";
+import TextInput from "../components/TextInput";
 import { FaUser, FaEye } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import Form from "../Form";
-import { adminSignIn } from "../../store/features/auth/userSlice";
+import Form from "../components/Form";
+import { adminSignIn } from "../store/features/auth/userSlice";
 
 
 export default function Login() {

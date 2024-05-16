@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { productGet } from "../../store/features/product/productSlice";
+import { productGet } from "../store/features/product/productSlice";
 import { Link } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";

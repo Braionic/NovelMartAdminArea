@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import UploadBox from "../UploadBox";
+import UploadBox from "../components/UploadBox";
 import { Stepper } from "react-form-stepper";
 
 export default function AddBlog() {
