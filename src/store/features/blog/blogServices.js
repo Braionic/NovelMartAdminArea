@@ -8,6 +8,7 @@ const fetchBlogs = async () => {
   }
 };
 
+
 export const blogServices = {
   fetchB: fetchBlogs,
 };

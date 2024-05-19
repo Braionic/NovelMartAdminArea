@@ -13,20 +13,6 @@ export default function BrandList() {
     dispatch(getBrands());
   }, []);
 
-  const dataSource = [
-    {
-      key: "1",
-      name: "Mike",
-      age: 32,
-      address: "10 Downing Street",
-    },
-    {
-      key: "2",
-      name: "John",
-      age: 42,
-      address: "10 Downing Street",
-    },
-  ];
 
   const columns = [
     {
@@ -49,6 +35,7 @@ export default function BrandList() {
   let brand = [];
   for (let i = 0; i < brands.length; i++) {
     brand.push({
+      key: i,
       NO: i + 1,
       title: brands[i].title,
       Action: (

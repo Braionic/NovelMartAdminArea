@@ -29,7 +29,6 @@ const userSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(adminSignIn.fulfilled, (state, action) => {
-        console.log("checking payload", action.payload);
         (state.user = action.payload),
           (state.isLoading = false),
           (state.error = null);
@@ -38,7 +37,6 @@ const userSlice = createSlice({
         (state.error = null), (state.isLoading = true), (state.user = null);
       })
       .addCase(adminSignIn.rejected, (state, action) => {
-        console.log("yawa", action.error.message);
         (state.error = action?.error?.message),
           (state.isLoading = false),
           (state.user = null);

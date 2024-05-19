@@ -3,6 +3,8 @@ import { Table } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { CategoryThunk } from "../store/features/category/categorySlice";
 import { Link } from "react-router-dom";
+import { MdDelete } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
 
 export default function Categories() {
   const categories = useSelector((state) => state.category.categories);
@@ -33,7 +35,16 @@ export default function Categories() {
     data.push({
       Key: i + 1,
       title: categories[i].title,
-      Action: <Link>Edit</Link>,
+      Action: (
+        <>
+           <Link className="fs-4" to="/">
+            <FaEdit />
+          </Link>
+          <Link to="/">
+            <MdDelete className="fs-4 text-danger" />
+          </Link>
+        </>
+      ),
     });
   }
 

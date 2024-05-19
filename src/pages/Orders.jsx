@@ -1,22 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Table } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllOrders } from "../store/features/cart/cartSlice";
 
 export default function Orders() {
-  const dataSource = [
-    {
-      key: "1",
-      name: "Mike",
-      age: 32,
-      address: "10 Downing Street",
-    },
-    {
-      key: "2",
-      name: "John",
-      age: 42,
-      address: "10 Downing Street",
-    },
-  ];
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state?.orders);
+  useEffect(() => {
+    dispatch(getAllOrders());
+  }, []);
 
+  console.log(data);
   const columns = [
     {
       title: "Name",
@@ -40,7 +34,7 @@ export default function Orders() {
       <h4>Orders</h4>
 
       <div>
-        <Table dataSource={dataSource} columns={columns} />;
+   
       </div>
     </div>
   );

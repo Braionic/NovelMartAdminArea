@@ -13,7 +13,6 @@ export default function Products() {
   useEffect(() => {
     dispatch(productGet());
   }, []);
-  console.log(products);
 
   const columns = [
     {
@@ -62,6 +61,7 @@ export default function Products() {
   const data = [];
   for (let i = 0; i < products.length; i++) {
     data.push({
+      key: i,
       NO: i + 1,
       title: products[i].title,
       description: products[i].description,

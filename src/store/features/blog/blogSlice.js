@@ -18,6 +18,14 @@ export const BlogsThunk = createAsyncThunk("api/blogs", async (thunkAPI) => {
   }
 });
 
+export const BlogCategories = createAsyncThunk("api/blogs/categories", (thunkAPI)=>{
+  try {
+    
+  } catch (error) {
+    thunkAPI.rejectWithValue(error.message)
+  }
+})
+
 const blogSlice = createSlice({
   name: "blog",
   initialState,
