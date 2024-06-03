@@ -11,14 +11,14 @@ const initialState = {
 };
 
 export const getAllOrders = createAsyncThunk(
-  "user/user-orders",
+  "user/user-order",
   async (_, thunkAPI) => {
     try {
       const chai = await fetchOrder.fetchOrders();
       console.log(chai);
       return chai;
     } catch (error) {
-     return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -39,11 +39,13 @@ const orderSlice = createSlice({
           (state.isLoading = false),
           (state.message = ""),
           (state.isError = false);
+          console.log(action.payload)
       })
       .addCase(getAllOrders.rejected, (state, action) => {
         (state.orders = []),
           (state.isLoading = false),
           (state.message = action.error),
+          (state.error = action.payload),
           (state.isError = true);
       });
   },

@@ -76,6 +76,16 @@ const LayoutRoute = () => {
                   icon: <VideoCameraOutlined />,
                   label: "Categories List",
                 },
+                {
+                  key: "color",
+                  icon: <VideoCameraOutlined />,
+                  label: "color",
+                },
+                {
+                  key: "color-list",
+                  icon: <VideoCameraOutlined />,
+                  label: "color List",
+                }
               ,
               ],
             },

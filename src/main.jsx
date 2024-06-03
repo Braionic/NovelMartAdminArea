@@ -20,6 +20,8 @@ import AddBlog from "./pages/AddBlog.jsx";
 import AddBlogCat from "./pages/AddBlogCat.jsx";
 import {Provider} from 'react-redux'
 import { store } from "./store/store.js";
+import Colors from "./pages/Color.jsx";
+import ColorList from "./pages/ColorList.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -41,7 +43,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="add-categories" element={<AddCategories />} />
         <Route path="categories" element={<Categories />} />
         <Route path="orders" element={<Orders />} />
-
+        <Route path="color" element={<Colors />} />
+        <Route path="color-list" element={<ColorList />} />
         <Route path="enquiries" element={<Enquiry />} />
       </Route>
     </Routes>
