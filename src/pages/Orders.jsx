@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 export default function Orders() {
   const navigate = useNavigate()
   const dispatch = useDispatch();
-  const data = useSelector((state) => state?.user?.allOrders);
+  const data = useSelector((state) => state.user.allOrders);
   useEffect(() => {
     dispatch(getAllOrders());
   }, []);

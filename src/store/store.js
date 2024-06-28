@@ -9,6 +9,7 @@ import blogCatSliceReducer from "./features/blogCat/blogCartSlice";
 import orderSliceReducer from "./features/cart/cartSlice";
 import colorReducer from "./features/color/colorSlice";
 import enquiryReducer from "./features/enquiry/EnquirySlice"
+import imageReducer from "./features/image/imageSlice"
 
 export const store = configureStore({
   reducer: {
@@ -21,6 +22,7 @@ export const store = configureStore({
     blogcat: blogCatSliceReducer,
     orders: orderSliceReducer,
     color: colorReducer,
-    enquiry: enquiryReducer
+    enquiry: enquiryReducer,
+    image: imageReducer
   },
 });

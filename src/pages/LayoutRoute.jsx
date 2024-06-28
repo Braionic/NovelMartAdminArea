@@ -11,6 +11,8 @@ import { Button, Layout, Menu, theme } from "antd";
 import { Outlet, useNavigate } from "react-router-dom";
 const { Header, Sider, Content } = Layout;
 import { FaBell } from "react-icons/fa";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { FaRegQuestionCircle, FaLuggageCart } from "react-icons/fa";
 import { AiOutlineDashboard } from "react-icons/ai";
 const LayoutRoute = () => {
@@ -187,6 +189,7 @@ const LayoutRoute = () => {
                   </div>
                 </div>
               </div>
+              <ToastContainer />
             </div>
           </div>
         </Header>

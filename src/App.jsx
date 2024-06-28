@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "./style.css";
+import "react-widgets/styles.css";
+
 import {
   GoArrowDownRight,
   GoArrowUpLeft,
