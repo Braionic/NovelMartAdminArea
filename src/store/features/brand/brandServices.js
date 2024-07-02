@@ -10,6 +10,16 @@ const fetchBrands = async () => {
   }
 };
 
+const addBrand = async (data) => {
+ try {
+  const response = await axios.post(`${baseUrl}/api/brand/`, data);
+    return response.data;
+ } catch (error) {
+  return error
+ }
+};
+
 export const brandServices = {
   getBrands: fetchBrands,
+  addBrand,
 };

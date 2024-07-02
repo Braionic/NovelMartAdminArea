@@ -8,6 +8,13 @@ const fetchCategories = async () => {
   }
 };
 
+const createCategory = async (data) => {
+  const response = await axios.post(`${baseUrl}/api/productcategory/`, data);
+  if(response?.data){
+    return response.data
+  }
+};
 export const categoryServices = {
   getCatgories: fetchCategories,
+  createCategory
 };

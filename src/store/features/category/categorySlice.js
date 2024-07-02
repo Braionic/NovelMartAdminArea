@@ -12,6 +12,7 @@ const initialState = {
   isSuccesfull: false,
   isLoading: false,
   error: null,
+  createdCategory: null
 };
 
 export const CategoryThunk = createAsyncThunk(
@@ -21,6 +22,19 @@ export const CategoryThunk = createAsyncThunk(
       return await categoryServices.getCatgories();
     } catch (e) {
       return thunkApi.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const addProductCategory = createAsyncThunk(
+  "/productcategory/add",
+  async (data, thunkApi) => {
+    try {
+      const response = await categoryServices.createCategory(data);
+      console.log("checkapi", response);
+      return response;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
     }
   }
 );
@@ -53,7 +67,21 @@ const categorySlice = createSlice({
           (state.isSuccesfull = false),
           (state.isLoading = false),
           (state.error = action.error);
-      });
+      })
+      .addCase(addProductCategory.pending, (state, action) => {
+        (state.isLoading = true), (state.isError = false), (state.error = "");
+      }).addCase(addProductCategory.fulfilled, (state, action)=>{
+        state.isLoading = false,
+        state.isError = false,
+        state.error = "",
+        state.isSuccesfull = true
+        state.createdCategory = action.payload
+      }).addCase(addProductCategory.rejected, (state, action)=>{
+        state.isError = true,
+        state.isSuccesfull = false,
+        state.error = action.error
+        state.isLoading = false
+      })
   },
 });
 

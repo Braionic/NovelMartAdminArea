@@ -67,21 +67,18 @@ export default function AddProduct() {
   };
   const handleChange = (value) => {
     setValue("color", value);
-
-    console.log(`selected ${value}`);
   };
 
   const onsubmit = (data) => {
-   
     dispatch(addProduct(data));
     if (addedProduct.isSUccessful && addedProduct.addedProduct) {
       toast.success("uploaded!", {
         position: "top-right",
       });
       reset();
-    setValue("images", "");
-    setValue("description", "");
-    handleDelete(data.images.public_id);
+      setValue("images", "");
+      setValue("description", "");
+      handleDelete(data.images.public_id);
     }
     setTimeout(() => {
       return navigate("/admin/products");
