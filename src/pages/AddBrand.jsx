@@ -23,9 +23,7 @@ export default function AddBrand() {
 
   const { iserror, isSuccess, addedBrand, isLoading } = addedBrands;
 
-    useEffect(() => {
-     
-
+  useEffect(() => {
     if (iserror == true) {
       toast.error("somethig went wrong");
       return navigate("../add-brand", { replace: true });
@@ -58,11 +56,13 @@ export default function AddBrand() {
                   value: true,
                   message: "brand name is required",
                 },
-                validate: async (fieldValue)=>{
-                  const response = await fetch(`http://localhost:1000/api/brand/single?title=${fieldValue}`)
-                  const data = await response.json()
-                  return data.length == 0 || `${fieldValue} already exist`
-                }
+                validate: async (fieldValue) => {
+                  const response = await fetch(
+                    `http://localhost:1000/api/brand/single?title=${fieldValue}`
+                  );
+                  const data = await response.json();
+                  return data.length == 0 || `${fieldValue} already exist`;
+                },
               }),
             }}
           />

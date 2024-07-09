@@ -6,7 +6,7 @@ async function getColors(){
         const response = await axios.get(`${baseUrl}/api/color/`);
         const data = response?.data;
         console.log(data)
-        if(data && data.length > 0){
+        if(data){
             return data
         }
     } catch (error) {
@@ -14,8 +14,17 @@ async function getColors(){
     }
 }
 
+async function createColor(data){
+    console.log(data)
+    const response = await axios.post(`${baseUrl}/api/color/`, data)
+    if(response.data){
+        console.log(response.data)
+        return response.data
+    }
+}
 const colorServices = {
     getColors,
+    createColor
 }
 
 export default colorServices

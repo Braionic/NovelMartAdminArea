@@ -9,7 +9,14 @@ const fetchBlogCategories = async () => {
   }
 };
 
+const createBlogCat = async(data)=>{
+const response = await axios.post(`${baseUrl}/api/blogcategory/`, data)
+if(response.data){
+  return response.data
+}
+}
 
 export const blogCategory = {
-    fetchBlogCategory: fetchBlogCategories
+    fetchBlogCategory: fetchBlogCategories,
+    createBlogCat
 }

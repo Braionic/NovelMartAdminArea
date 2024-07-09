@@ -8,7 +8,17 @@ const fetchBlogs = async () => {
   }
 };
 
-
+const createBlog = async (data)=>{
+try {
+  const response = await axios.post(`${baseUrl}/api/blog/`, data)
+if(response?.data){
+  return response.data
+}
+} catch (error) {
+  return error.message
+}
+}
 export const blogServices = {
   fetchB: fetchBlogs,
+  createBlog
 };
