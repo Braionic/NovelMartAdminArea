@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { productServices } from "./productServices";
 //import fetchProduct from "./productServices"
 
@@ -8,9 +8,10 @@ const initialState = {
   isError: false,
   message: "",
   isSUccessful: false,
-  addedProduct: ""
+  addedProduct: "",
 };
 
+export const revertAll = createAction("Reset_all");
 export const productGet = createAsyncThunk(
   "api/products/",
   async (_, thunkAPI) => {
@@ -59,18 +60,21 @@ const productSlice = createSlice({
       })
       .addCase(addProduct.pending, (state, action) => {
         (state.isLoading = true), (state.isError = false);
-      }).addCase(addProduct.fulfilled, (state, action)=>{
-        state.isLoading = false,
-        state.isError = false,
-        state.isSUccessful = true,
-        state.addedProduct = action.payload,
-        state.message = action.payload
-      }).addCase(addProduct.rejected, (state, action)=>{
-        state.isLoading = false,
-        state.isError = true,
-        state.isSUccessful = false,
-        state.message = action.error
       })
+      .addCase(addProduct.fulfilled, (state, action) => {
+        (state.isLoading = false),
+          (state.isError = false),
+          (state.isSUccessful = true),
+          (state.addedProduct = action.payload),
+          (state.message = action.payload);
+      })
+      .addCase(addProduct.rejected, (state, action) => {
+        (state.isLoading = false),
+          (state.isError = true),
+          (state.isSUccessful = false),
+          (state.message = action.error);
+      })
+      .addCase(revertAll, () => initialState);
   },
 });
 

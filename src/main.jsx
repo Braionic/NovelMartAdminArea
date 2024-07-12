@@ -22,6 +22,8 @@ import {Provider} from 'react-redux'
 import { store } from "./store/store.js";
 import Colors from "./pages/Color.jsx";
 import ColorList from "./pages/ColorList.jsx";
+import AddCoupon from "./pages/AddCoupon.jsx";
+import ListCoupons from "./pages/ListCoupons.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -37,6 +39,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="blogs" element={<Blogs />} />
         <Route path="brand-list" element={<BrandList />} />
         <Route path="add-brand" element={<AddBrand />} />
+        <Route path="add-brand/:id" element={<AddBrand />} />
         <Route path="add-blog" element={<AddBlog />} />
         <Route path="add-blog-cat" element={<AddBlogCat />} />
         <Route path="blog-categories" element={<BlogCategories />} />
@@ -46,6 +49,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="color" element={<Colors />} />
         <Route path="color-list" element={<ColorList />} />
         <Route path="enquiries" element={<Enquiry />} />
+        <Route path="add-coupon" element={<AddCoupon />} />
+        <Route path="list-coupons" element={<ListCoupons />} />
       </Route>
     </Routes>
   </BrowserRouter>

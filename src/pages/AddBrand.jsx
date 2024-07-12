@@ -1,44 +1,85 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TextInput from "../components/TextInput";
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
-import { createBrand } from "../store/features/brand/brandSlice";
-import { useNavigate } from "react-router-dom";
+import {
+  createBrand,
+  getOneBrandName,
+  revertAll,
+  updateBrand,
+} from "../store/features/brand/brandSlice";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import axios from "axios";
+
 
 export default function AddBrand() {
-  const form = useForm();
+  const location = useLocation();
+  const paramID = location.pathname?.split("/")[3]
+  useEffect(() => {
+    if (paramID !== undefined) {
+      dispatch(
+        getOneBrandName(paramID)
+      );
+    }else{
+      dispatch(revertAll())
+    }
+  }, [paramID]);
+  
+  const brandState = useSelector((state) => state.brand.oneBrand?.title);
+  const form = useForm({
+    defaultValues: { title: brandState },
+  });
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const addedBrands = useSelector((state) => state.brand);
-
+  
   const {
     register,
     handleSubmit,
+    getValues,
+    setValue,
     control,
     formState: { errors },
   } = form;
 
-  const { iserror, isSuccess, addedBrand, isLoading } = addedBrands;
-
+  const {updatedBrand, iserror, isSuccess, addedBrand, isLoading } = addedBrands;
+  
   useEffect(() => {
-    if (iserror == true) {
-      toast.error("somethig went wrong");
-      return navigate("../add-brand", { replace: true });
-    }
-  }, [iserror]);
-  console.log(addedBrands);
-
-  const onsubmit = (data) => {
-    dispatch(createBrand(data));
     if (isSuccess && addedBrand) {
       toast.success("Brand added successfully");
+    }
+
+    if (isSuccess && updatedBrand) {
+      toast.success("Brand updated successfully");
+    }
+
+    if (iserror == true) {
+      toast.error("somethig went wrong");
+    }
+  }, [iserror, isSuccess, isLoading]);
+  console.log(addedBrands);
+  console.log(brandState);
+  const onsubmit = (data) => {
+    if (paramID) {
+      dispatch(
+        updateBrand({
+          id: paramID,
+          title: data.title,
+        })
+      );
       setTimeout(() => {
+        dispatch(revertAll());
+        navigate("../brand-list", { replace: true });
+      }, 3000);
+    } else {
+      dispatch(createBrand(data));
+      setTimeout(() => {
+        dispatch(revertAll());
         navigate("../brand-list", { replace: true });
       }, 3000);
     }
+    
   };
 
   return (
@@ -49,7 +90,6 @@ export default function AddBrand() {
           <TextInput
             type="text"
             name={"title"}
-            placeholder={"brand name"}
             hf={{
               ...register("title", {
                 required: {
@@ -68,7 +108,7 @@ export default function AddBrand() {
           />
           <p className="text-danger">{errors?.title?.message}</p>
           <DevTool control={control} />
-          <button className="btn-sm btn-primary">Submit</button>
+          <button className="btn-sm btn-primary">{paramID? "Update Brand": "Submit"}</button>
         </div>
       </form>
     </>

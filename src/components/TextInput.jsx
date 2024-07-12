@@ -27,7 +27,7 @@ export default function TextInput({
           {...hf}
           type={type}
           className={`form-control ${className}`}
-          value={value}
+        
           placeholder={placeholder}
           id={`exampleInput ${name}`}
           aria-describedby="emailHelp"

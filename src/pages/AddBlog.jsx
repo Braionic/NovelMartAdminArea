@@ -64,6 +64,8 @@ export default function AddBlog() {
       return navigate("/admin/blogs", { replace: true });
     }, 3000);
   };
+
+  console.log(blogCats)
   return (
     <>
       <h4>AddBlog</h4>
@@ -112,8 +114,8 @@ export default function AddBlog() {
               <option value={"default"} disabled>
                 select category
               </option>
-              {blogCats?.map((blogCat, index) => (
-                <option value={blogCat.title} key={index}>
+              {Object.values(blogCats).map((blogCat, index) => (
+                <option value={blogCat?.title} key={index}>
                   {blogCat.title}
                 </option>
               ))}

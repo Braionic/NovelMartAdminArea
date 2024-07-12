@@ -128,6 +128,23 @@ const LayoutRoute = () => {
               icon: <FaRegQuestionCircle />,
               label: "Enquiries",
             },
+            {
+              key: "coupons",
+              icon: <VideoCameraOutlined />,
+              label: "Coupons",
+              children: [
+                {
+                  key: "add-coupon",
+                  icon: <VideoCameraOutlined />,
+                  label: "Add Coupon"
+                },
+                {
+                  key: "list-coupons",
+                  icon: <VideoCameraOutlined />,
+                  label: "Coupons"
+                }
+              ]
+            }
           ]}
         />
       </Sider>

@@ -16,7 +16,7 @@ import Dropzone from "react-dropzone";
 import { removeImage, uploadImg } from "../store/features/image/imageSlice";
 import { MdDelete } from "react-icons/md";
 import { Select, Space } from "antd";
-import { addProduct } from "../store/features/product/productSlice";
+import { addProduct, revertAll } from "../store/features/product/productSlice";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 
@@ -50,12 +50,18 @@ export default function AddProduct() {
   }, []);
 
   useEffect(() => {
-    if (addedProduct.isError) {
-      toast.error("something went wrong !", {
-        position: "top-right",
-      });
+    if (addedProduct.isSUccessful && addedProduct.addedProduct) {
+      toast.success("uploaded!");
     }
-  }, [addedProduct?.isError]);
+
+    if (addedProduct.isError) {
+      toast.error("something went wrong !");
+    }
+  }, [
+    addedProduct?.isError,
+    addedProduct.isSUccessful,
+    addedProduct.isLoading,
+  ]);
 
   useEffect(() => {
     setValue("images", images);
@@ -71,16 +77,12 @@ export default function AddProduct() {
 
   const onsubmit = (data) => {
     dispatch(addProduct(data));
-    if (addedProduct.isSUccessful && addedProduct.addedProduct) {
-      toast.success("uploaded!", {
-        position: "top-right",
-      });
-      reset();
-      setValue("images", "");
-      setValue("description", "");
-      handleDelete(data.images.public_id);
-    }
+    reset();
+    setValue("images", "");
+    setValue("description", "");
+    handleDelete(data.images.public_id);
     setTimeout(() => {
+      dispatch(revertAll());
       return navigate("/admin/products");
     }, 3000);
 
