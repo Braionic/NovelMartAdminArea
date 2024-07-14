@@ -20,8 +20,11 @@ export default function BrandList() {
   const brands = useSelector((state) => state.brand.brands);
   const deletedBrandState = useSelector((state) => state.brand);
   useEffect(() => {
+  
     dispatch(getBrands());
   }, [deletedBrandState.deletedBrand]);
+
+
   useEffect(() => {
     if (deletedBrandState.isSuccess && deletedBrandState.deletedBrand) {
       toast.success("deleted successfully");
@@ -31,7 +34,8 @@ export default function BrandList() {
       toast.error("An error occured");
     }
   }, [deletedBrandState.isLoading, deletedBrandState.isError]);
-  console.log(deletedBrandState, "deletedbrandstate");
+
+  
   const handleAction = (id) => {
     setModalOpen(true);
     setBrandId(id);

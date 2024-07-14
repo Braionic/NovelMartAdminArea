@@ -42,6 +42,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="add-brand/:id" element={<AddBrand />} />
         <Route path="add-blog" element={<AddBlog />} />
         <Route path="add-blog-cat" element={<AddBlogCat />} />
+        <Route path="add-blog-cat/:id" element={<AddBlogCat />} />
         <Route path="blog-categories" element={<BlogCategories />} />
         <Route path="add-categories" element={<AddCategories />} />
         <Route path="categories" element={<Categories />} />
@@ -51,6 +52,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="enquiries" element={<Enquiry />} />
         <Route path="add-coupon" element={<AddCoupon />} />
         <Route path="list-coupons" element={<ListCoupons />} />
+       
       </Route>
     </Routes>
   </BrowserRouter>

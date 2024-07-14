@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Button, Modal } from 'antd';
-const CustomModal = ({modalOpen, setModalOpen, text, actionFunction}) => {
+import React, { useState } from "react";
+import { Button, Modal } from "antd";
+const CustomModal = ({ modalOpen, setModalOpen, text, actionFunction }) => {
   return (
     <>
       <Modal
@@ -14,8 +14,6 @@ const CustomModal = ({modalOpen, setModalOpen, text, actionFunction}) => {
       >
         <p>{text}</p>
       </Modal>
-    
-     
     </>
   );
 };

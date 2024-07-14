@@ -18,6 +18,9 @@ if(response?.data){
   return error.message
 }
 }
+
+
+
 export const blogServices = {
   fetchB: fetchBlogs,
   createBlog

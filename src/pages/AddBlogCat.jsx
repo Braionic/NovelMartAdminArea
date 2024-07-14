@@ -3,49 +3,82 @@ import TextInput from "../components/TextInput";
 import { DevTool } from "@hookform/devtools";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { createBCat, revertAll} from "../store/features/blogCat/blogCartSlice";
+import {
+  createBCat,
+  getOneBCat,
+  revertAll,
+  updateBlogCategoty,
+} from "../store/features/blogCat/blogCartSlice";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function AddBlogCat() {
   const bcatState = useSelector((state) => state.blogcat);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  const id = location.pathname.split("/")[3];
 
+
+  useEffect(() => {
+    if (id) {
+      dispatch(getOneBCat(id));
+      dispatch(revertAll())
+    } else {
+      dispatch(revertAll())
+    }
+  }, [id]);
+  const { isLoading, isError, isSuccess, createdBCat, singleCat , updatedBCat } = bcatState;
   const form = useForm({
     defaultValues: {
-      title: "",
+      title: id? singleCat.title: "",
     },
   });
-  //console.log(bcatState.createdBCat, "what is tthis");
-  const { isLoading, isError, isSuccess, createdBCat } = bcatState;
+  
 
+
+ 
   useEffect(() => {
     if (isSuccess && createdBCat) {
       toast.success("created");
     }
-
+    if (isSuccess && updatedBCat) {
+      toast.success("Category updated");
+    }
     if (isError) {
       toast.error("Something went wrong");
     }
   }, [isError, isSuccess, isLoading]);
+  
   const {
     register,
     handleSubmit,
     control,
+    setValue,
     formState: { errors },
   } = form;
+  useEffect(()=>{
+    if(singleCat.title){
+      setValue("title", singleCat.title)
+    }else{
+      setValue("title", "")
+    }
+      }, [singleCat])
 
   const onsubmit = (data) => {
-    dispatch(createBCat(data));
-    
+    if(id){
+     dispatch(updateBlogCategoty({title: data.title, id: id}))
+    }else{
+      dispatch(createBCat(data));
+    }
     setTimeout(() => {
       dispatch(revertAll());
       return navigate("/admin/blog-categories");
     }, 3000);
   };
-  console.log(isSuccess, createdBCat, "testing")
+
   return (
     <div>
       <h4>Add Blog Category</h4>
@@ -72,7 +105,7 @@ export default function AddBlogCat() {
           label="Yello My Guy"
         />
         <p className="text-danger">{errors?.title?.message}</p>
-        <button className="btn-sm btn-primary">Create blog</button>
+        <button className="btn-sm btn-primary">{id? "Edit category": "Create blog"}</button>
         <DevTool control={control} />
       </form>
     </div>

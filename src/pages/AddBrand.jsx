@@ -58,8 +58,7 @@ export default function AddBrand() {
       toast.error("somethig went wrong");
     }
   }, [iserror, isSuccess, isLoading]);
-  console.log(addedBrands);
-  console.log(brandState);
+  
   const onsubmit = (data) => {
     if (paramID) {
       dispatch(
