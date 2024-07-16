@@ -81,7 +81,7 @@ export default function AddBlogCat() {
 
   return (
     <div>
-      <h4>Add Blog Category</h4>
+      <h4>{id? "Edit": "Add"} Blog Category</h4>
       <form onSubmit={handleSubmit(onsubmit)} noValidate>
         <TextInput
           placeholder="category name"
@@ -92,17 +92,9 @@ export default function AddBlogCat() {
                 value: true,
                 message: "category name is required",
               },
-              validate: async (fieldValue) => {
-                const response = await axios.get(
-                  `http://localhost:1000/api/blogcategory/single?title=${fieldValue}`
-                );
-                return (
-                  response.data.length == 0 || `${fieldValue} already exists`
-                );
-              },
             }),
           }}
-          label="Yello My Guy"
+          label="Category title"
         />
         <p className="text-danger">{errors?.title?.message}</p>
         <button className="btn-sm btn-primary">{id? "Edit category": "Create blog"}</button>
@@ -111,3 +103,14 @@ export default function AddBlogCat() {
     </div>
   );
 }
+
+/*
+  validate: async (fieldValue) => {
+                const response = await axios.get(
+                  `http://localhost:1000/api/blogcategory/single?title=${fieldValue}`
+                );
+                return (
+                  response.data.length == 0 || `${fieldValue} already exists`
+                );
+              }
+*/
