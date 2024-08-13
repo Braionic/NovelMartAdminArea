@@ -11,6 +11,7 @@ import colorReducer from "./features/color/colorSlice";
 import enquiryReducer from "./features/enquiry/EnquirySlice"
 import imageReducer from "./features/image/imageSlice";
 import couponReducer from "./features/coupon/couponSlice";
+import tagSlice from "./features/tag/tagSlice";
 
 export const store = configureStore({
   reducer: {
@@ -25,6 +26,7 @@ export const store = configureStore({
     color: colorReducer,
     enquiry: enquiryReducer,
     image: imageReducer,
-    coupon: couponReducer
+    coupon: couponReducer,
+    tag: tagSlice
   },
 });

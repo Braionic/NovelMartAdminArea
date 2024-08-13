@@ -15,6 +15,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaRegQuestionCircle, FaLuggageCart } from "react-icons/fa";
 import { AiOutlineDashboard } from "react-icons/ai";
+import TagList from "./TagList";
 const LayoutRoute = () => {
   const [collapsed, setCollapsed] = useState(true);
   const navigate = useNavigate();
@@ -71,12 +72,22 @@ const LayoutRoute = () => {
                 {
                   key: "add-categories",
                   icon: <VideoCameraOutlined />,
-                  label: "Add Categories",
+                  label: "Add Product Categories",
                 },
                 {
                   key: "categories",
                   icon: <VideoCameraOutlined />,
-                  label: "Categories List",
+                  label: "Product Categories",
+                },
+                {
+                  key: "tag-list",
+                  icon: <VideoCameraOutlined />,
+                  label: "Product Tags"
+                },
+                {
+                  key: "add-tag",
+                  icon: <VideoCameraOutlined />,
+                  label: "Add Product Tag"
                 },
                 {
                   key: "color",

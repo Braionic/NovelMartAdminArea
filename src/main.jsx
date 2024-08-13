@@ -24,6 +24,9 @@ import Colors from "./pages/Color.jsx";
 import ColorList from "./pages/ColorList.jsx";
 import AddCoupon from "./pages/AddCoupon.jsx";
 import ListCoupons from "./pages/ListCoupons.jsx";
+import UpdateEnqStatus from "./pages/UpdateEnqStatus.jsx";
+import AddTag from "./pages/AddTag.jsx";
+import TagList from "./pages/TagList.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -38,7 +41,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="customers" element={<Customers />} />
         <Route path="blogs" element={<Blogs />} />
         <Route path="brand-list" element={<BrandList />} />
+        <Route path="tag-list" element={<TagList />} />
         <Route path="add-brand" element={<AddBrand />} />
+        <Route path="add-tag" element={<AddTag />} />
         <Route path="add-brand/:id" element={<AddBrand />} />
         <Route path="add-blog" element={<AddBlog />} />
         <Route path="add-blog-cat" element={<AddBlogCat />} />
@@ -50,7 +55,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="color" element={<Colors />} />
         <Route path="color-list" element={<ColorList />} />
         <Route path="enquiries" element={<Enquiry />} />
+        <Route path="enquiries/:id" element={<UpdateEnqStatus />} />
         <Route path="add-coupon" element={<AddCoupon />} />
+        <Route path="add-coupon/:id" element={<AddCoupon />} />
         <Route path="list-coupons" element={<ListCoupons />} />
        
       </Route>

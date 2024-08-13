@@ -38,6 +38,11 @@ export default function Products() {
       key: "brand",
     },
     {
+      title: "Tag",
+      dataIndex: "tag",
+      key: "brand"
+    },
+    {
       title: "price",
       dataIndex: "price",
       key: "price",
@@ -66,6 +71,7 @@ export default function Products() {
       title: products[i].title,
       description: products[i].description,
       price: products[i].price,
+      tag: products[i].tags,
       quantity: products[i].quantity,
       createdAt: products[i].createdAt,
       brand: products[i].brand,

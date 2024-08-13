@@ -1,39 +1,71 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Textinput from "../components/TextInput";
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { createCoupon, revertAll } from "../store/features/coupon/couponSlice";
+import {
+  createCoupon,
+  getOneCoupon,
+  revertAll,
+} from "../store/features/coupon/couponSlice";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+
 export default function AddCoupon() {
-  const form = useForm();
-  const dispatch = useDispatch();
   const couponState = useSelector((state) => state.coupon);
-  const { isLoading, isSuccess, isError, createdCoupon } = couponState;
+  const { isLoading, isSuccess, isError, createdCoupon, oneCoupon } =
+    couponState;
+
+  const form = useForm({
+    defaultValues: {
+      title: oneCoupon || "",
+      discount: "",
+      date: "",
+    },
+  });
+
+  const {
+    control,
+    setValue,
+    register,
+    handleSubmit,
+    formState: { isDirty, errors },
+  } = form;
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
+  const location = useLocation();
+  const id = location.pathname.split("/")[3];
+
+  useEffect(() => {
+    if (id) {
+      dispatch(getOneCoupon(id));
+      //dispatch(revertAll())
+    } else {
+      dispatch(revertAll());
+    }
+  }, [isSuccess]);
+
+  console.log(oneCoupon, "trigger")
   useEffect(() => {
     if (isSuccess && createdCoupon) {
       toast.success("coupon created successully");
     }
+
     if (isError) {
       toast.error("an error occured");
     }
   }, [isSuccess, isLoading, isError]);
 
-  useEffect(() => {
-    dispatch(revertAll());
-  }, []);
-  const {
-    control,
-    register,
-    handleSubmit,
-    formState: { isDirty, errors },
-  } = form;
-  console.log(errors);
+  console.log(isLoading, isSuccess, "coupon state");
 
-  console.log(couponState, "coupon state");
+  useState(() => {
+    if (oneCoupon) {
+      setValue("title", oneCoupon?.title);
+    }
+  }, [oneCoupon, isLoading]);
+
   function onsubmit(data) {
     console.log(data);
     dispatch(createCoupon(data));
@@ -42,15 +74,15 @@ export default function AddCoupon() {
       return navigate("/admin/list-coupons", { replace: true });
     }, 4000);
   }
+
   return (
     <div>
-      <h3>Add Coupon</h3>
+      <h3>{id ? "Edit" : "Add"} Coupon</h3>
 
       <div className="form">
         <form onSubmit={handleSubmit(onsubmit)} noValidate>
           <Textinput
             label={"Coupon Title"}
-            name="title"
             hf={{
               ...register("title", {
                 required: {
@@ -62,7 +94,7 @@ export default function AddCoupon() {
                     `http://localhost:1000/api/coupon/single?title=${fieldValue}`
                   );
                   return (
-                    response?.data?.length == 0 ||
+                    response?.data?.length !== 0 ||
                     `${fieldValue} already exists`
                   );
                 },
@@ -78,6 +110,7 @@ export default function AddCoupon() {
           {<p className="text-danger">{errors?.discount?.message}</p>}
           <Textinput
             type="date"
+            label={"Expiry Date"}
             hf={{
               ...register("expires", {
                 required: {

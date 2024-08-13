@@ -21,7 +21,6 @@ export default function AddBlogCat() {
   const location = useLocation();
   const id = location.pathname.split("/")[3];
 
-
   useEffect(() => {
     if (id) {
       dispatch(getOneBCat(id));
@@ -37,8 +36,6 @@ export default function AddBlogCat() {
     },
   });
   
-
-
  
   useEffect(() => {
     if (isSuccess && createdBCat) {
@@ -59,6 +56,8 @@ export default function AddBlogCat() {
     setValue,
     formState: { errors },
   } = form;
+
+  
   useEffect(()=>{
     if(singleCat.title){
       setValue("title", singleCat.title)

@@ -19,6 +19,7 @@ import { Select, Space } from "antd";
 import { addProduct, revertAll } from "../store/features/product/productSlice";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { getTags } from "../store/features/tag/tagSlice";
 
 export default function AddProduct() {
   const {
@@ -29,13 +30,25 @@ export default function AddProduct() {
     setValue,
     getValues,
     reset,
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      title: "",
+      tags: [],
+      images: [],
+      price: 0,
+      description: "",
+      category: "",
+      quantity: 0,
+      color: ""
+    }
+  });
   const [value, setQValue] = useState("");
   const [selectted, setSelect] = useState();
   const [mycolor, setColor] = useState("");
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.category.categories);
   const brands = useSelector((state) => state.brand.brands);
+  const tags = useSelector((state) => state.tag.tags);
   const colors = useSelector((state) => state.color.color);
   const images = useSelector((state) => state.image.images);
   const addedProduct = useSelector((state) => state.product);
@@ -45,6 +58,7 @@ export default function AddProduct() {
   const { errors, isDirty } = formState;
   useEffect(() => {
     dispatch(getBrands());
+    dispatch(getTags())
     dispatch(CategoryThunk());
     dispatch(getColors());
   }, []);
@@ -76,6 +90,7 @@ export default function AddProduct() {
   };
 
   const onsubmit = (data) => {
+    alert(JSON.stringify(data))
     dispatch(addProduct(data));
     reset();
     setValue("images", "");
@@ -259,6 +274,30 @@ export default function AddProduct() {
               ))}
             </select>
             <p className="text-danger">{errors?.brand?.message}</p>
+          </div>
+          <div className="mb-3">
+            <label className="form-check-label">Select tag</label>
+            <select
+              defaultValue={"default"}
+              className="form-select"
+              aria-label="Default select example"
+              {...register("tags", {
+                required: {
+                  value: true,
+                  message: "please select a product tag",
+                },
+              })}
+            >
+              <option value={"default"} disabled>
+                Choose a tag
+              </option>
+              {tags?.map((tag, index) => (
+                <option value={tag.title} key={index}>
+                  {tag.title}
+                </option>
+              ))}
+            </select>
+            <p className="text-danger">{errors?.tags?.message}</p>
           </div>
           <div className="mb-3">
             <label className="form-check-label">Quantity</label>

@@ -1,13 +1,20 @@
 import React, { useState } from "react";
 import { Button, Modal } from "antd";
-const CustomModal = ({ modalOpen, setModalOpen, text, actionFunction }) => {
+const CustomModal = ({
+  topTitle,
+  modalOpen,
+  setModalOpen,
+  text,
+  actionFunction,
+}) => {
   return (
     <>
       <Modal
-        title="20px to Top"
+        title={topTitle || "message"}
         style={{
           top: 20,
         }}
+        
         open={modalOpen}
         onOk={() => actionFunction()}
         onCancel={() => setModalOpen(false)}
