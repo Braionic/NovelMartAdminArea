@@ -29,6 +29,7 @@ export default function AddCategories() {
     if (addCatState.isSuccesfull) {
       toast.success("product added successfully!");
       setTimeout(() => {
+        
         return navigate("/admin/categories");
       }, 3000);
     }

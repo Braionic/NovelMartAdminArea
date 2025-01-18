@@ -28,7 +28,8 @@ export const getOneBCat = createAsyncThunk(
       return thunkAPI.rejectWithValue(error);
     }
   }
-);
+)
+
 export const getBlogCategories = createAsyncThunk(
   "/api/blogcat",
   async (thunkAPI) => {
